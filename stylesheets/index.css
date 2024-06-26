@@ -1,6 +1,6 @@
 .home-section-container {
     --bg-white-overlay: rgba(0, 0, 0, 0.8);
-    background: linear-gradient(var(--bg-white-overlay), var(--bg-white-overlay)), url("/assets/background_1.jpg");
+    background: linear-gradient(var(--bg-white-overlay), var(--bg-white-overlay)), url("../assets/background_1.jpg");
     background-size: cover;
     background-position: center;
     min-height: 80vh;
@@ -238,7 +238,7 @@
     align-items: center;
     padding: 4em;
     --bg-overlay: rgb(39, 39, 39, .8);
-    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url("/assets/background_2.jpg");
+    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url("../assets/background_2.jpg");
     background-size: cover;
     background-attachment: fixed;
     color: white;
