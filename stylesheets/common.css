@@ -108,7 +108,7 @@ body {
     /* display: none; */
 }
 
-.overlay-container form {
+.overlay-container > * {
     width: min(90%, 60em);
     background: white;
     max-height: 90%;

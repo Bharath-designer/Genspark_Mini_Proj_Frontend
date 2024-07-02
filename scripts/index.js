@@ -1,5 +1,6 @@
+import EventCard from "../components/Home/EventCard.js";
+import TestimonialCard from "../components/Home/TestimonialCard.js";
 import fetchData from "../utilities/FetchData.js";
-import { createQuotationRequestOverlay } from "./QuotationRequestOverlay.js";
 
 let userRole = null
 
@@ -19,18 +20,6 @@ const getUserRole = async () => {
     userRole = data.role
 }
 
-const requestQuotationClickHandler = (e) => {
-    const btnElement = e.currentTarget
-
-    const { eventId } = btnElement.dataset
-
-    if (userRole === null) {
-        location.href = '/Login.html'
-    }
-
-    createQuotationRequestOverlay(eventId)
-
-}
 
 const makeEvents = async () => {
     try {
@@ -38,66 +27,60 @@ const makeEvents = async () => {
         const { data: events } = await fetchData("/api/events", "GET", null, true)
         const container = document.querySelector(".service-elements-container")
         events.forEach(event => {
-            const template = document.createElement("template")
-            template.innerHTML =
-                `
-            <div  class="service-element">
-            <div class="title">
-                    ${event.eventName}
-                    </div>
-                    <div class="service-desc">
-                    ${event.description}
-                    </div>
-                    ${userRole === 'Admin' ? "" :
-                    `
-                        <button data-event-id=${event.eventCategoryId} class="request-quotation-btn">
-                        Request Quotation
-                        </button>
-                        `
-                }
-                        </div>
-                        
-        `
-            const content = template.content
-            const requestBtn = content.querySelector(".request-quotation-btn")
-            if (requestBtn) requestBtn.onclick = requestQuotationClickHandler
-            container.append(template.content)
+            const eventCardContent = EventCard(event, userRole)
+            container.append(eventCardContent)
         })
     } catch (error) {
         alert("Can't establish backend connection, some content might not be loaded")
     }
 }
 
-makeEvents()
-
-
-const hamburgerIcon = document.querySelector(".hamburger-icon")
-const navBar = document.querySelector(".profile-left")
-const hamburgerImg = hamburgerIcon.querySelector("img")
-
-let isNavOpen = false
-
-
-const autoCloseFunc = (e) => {
-    if (!e.target.closest('.mobile-nav-right') || e.target.closest('.nav-item')) {
-        hamburgerIcon.click()
+const makeTestimonials = async () => {
+    try {
+        const { data: events } = await fetchData("/api/events/review/top", "GET", null, true)
+        const container = document.querySelector(".testimonial-wrapper")
+        events.forEach(event => {
+            const testimonialCardContent = TestimonialCard(event)
+            container.append(testimonialCardContent)
+        })
+    } catch (error) {
+        alert("Can't establish backend connection, some content might not be loaded")
     }
 }
 
 
-hamburgerIcon.onclick = (e) => {
-    e.stopPropagation()
-    navBar.classList.toggle('hidden')
-    isNavOpen = !isNavOpen
-    if (isNavOpen) {
-        if (userRole !== null) {
-            navBar.classList.add("authenticated");
+const hamburgerEvents = () => {
+    const hamburgerIcon = document.querySelector(".hamburger-icon")
+    const navBar = document.querySelector(".mobile-nav-right")
+    const hamburgerImg = hamburgerIcon.querySelector("img")
+    console.log(hamburgerIcon);     
+    let isNavOpen = false
+    
+    const autoCloseFunc = (e) => {
+        if (!e.target.closest('.mobile-nav-right') || e.target.closest('.nav-item')) {
+            hamburgerIcon.click()
         }
-        hamburgerImg.src = "./assets/white_close.svg"
-        document.body.addEventListener('click', autoCloseFunc)
-    } else {
-        hamburgerImg.src = "./assets/hamburger.svg"
-        document.body.removeEventListener('click', autoCloseFunc)
+    }
+    
+    
+    hamburgerIcon.onclick = (e) => {
+        e.stopPropagation()
+        navBar.classList.toggle('hidden')
+        isNavOpen = !isNavOpen
+        if (isNavOpen) {
+            if (userRole !== null) {
+                navBar.classList.add("authenticated");
+            }
+            hamburgerImg.src = "./assets/white_close.svg"
+            document.body.addEventListener('click', autoCloseFunc)
+        } else {
+            hamburgerImg.src = "./assets/hamburger.svg"
+            document.body.removeEventListener('click', autoCloseFunc)
+        }
     }
 }
 
+
+hamburgerEvents()
+makeEvents()
+makeTestimonials()

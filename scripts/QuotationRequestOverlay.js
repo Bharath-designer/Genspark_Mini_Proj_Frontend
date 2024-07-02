@@ -145,9 +145,6 @@ const submitHandler = async (e, saveFuntion) => {
         return;
     }
 
-
-    console.log(eventEndDate);
-
     await saveFuntion({
         venueType,
         foodPreference,
@@ -160,6 +157,7 @@ const submitHandler = async (e, saveFuntion) => {
 
     cancelQuotationRequestOverlay()
     location.href = "/Profile.html"
+    
 }
 
 export const createQuotationRequestOverlay = (eventCategoryId) => {

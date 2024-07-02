@@ -9,7 +9,7 @@ const fetchData = async (url, method, payload, skipActions) => {
             success: false,
             data: null
         }
-        if (!["/api/register", "/api/login", "/api/events"].includes(url)) {
+        if (!["/api/register", "/api/login", "/api/events", "/api/events/review/top"].includes(url)) {
             if (!token) {
                 if (skipActions) {
                     return skipActionsResult

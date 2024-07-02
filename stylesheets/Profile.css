@@ -21,6 +21,7 @@
     padding: 2em 0;
 }
 
+.logo,
 .profile-left .profile-logo img {
     width: min(70%, 10em);
     user-select: none;
@@ -332,6 +333,73 @@
     display: none;
 }
 
+.reviews-container {
+    gap: 1.5em;
+    flex: 1;
+    overflow: auto;
+    align-items: center;
+    width: min(40em, 90%);
+    margin: 1em auto;
+    padding: 1em;
+    scrollbar-width: none;
+}
+
+.reviews-container.hidden {
+    display: none;
+}
+
+.reviews-container + .review-empty-text{
+    display: none;
+}
+.reviews-container.hidden + .review-empty-text{
+    display: block;
+    padding: 3em 1em;
+    text-align: center;
+}
+
+
+.review-card {
+    background: white;
+    padding: 1em;
+    border-radius: .25em;
+    box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.4);
+    color: #494949;
+    margin: 1em 0;
+}
+
+.review-card .name-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-card .name {
+    font-weight: bold;
+    background: var(--primary-gradient);
+    background-clip: text;
+    color: transparent;
+
+}
+
+.review-card .name-row .rating-container {
+    display: flex;
+    gap: .25em;
+}
+
+.review-card .name-row .rating {
+    display: flex;
+}
+
+.review-card .name-row .rating img {
+    width: 1.2em;
+}
+
+.review-card .comment-row {
+    margin-top: 1em;
+    font-size: .9em;
+    text-align: justify;
+}
+
+
 
 @media screen and (max-width: 800px) {
     .profile-left {
@@ -352,7 +420,7 @@
     .top-bar {
         display: flex;
         background: #101036;
-        padding:  1em;
+        padding: 1em;
         align-items: center;
         justify-content: space-between;
     }
@@ -363,6 +431,7 @@
 
     .top-bar .hamburger-icon {
         height: 1.5em;
+        cursor: pointer;
     }
 
 }

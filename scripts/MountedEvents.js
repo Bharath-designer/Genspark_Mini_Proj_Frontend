@@ -58,7 +58,6 @@ export const ordersMounted = () => {
 export const scheduledEventListMounted = () => {
     bindMarkAsCompletedListener()
     makeActiveTab("scheduledEvents")
-
 }
 
 export const adminScheduledEventListMounted = () => {
