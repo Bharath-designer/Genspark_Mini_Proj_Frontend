@@ -64,9 +64,7 @@ const tabsOptions = {
 let loading = false
 
 export const makeActiveTab = async (tab, requestId) => {
-    console.log("called");
     if (loading) return;
-    console.log("called 2");
     loading = true
     const options = tabsOptions[tab]
     if (!options) throw new Error(`Tab '${tab}' options are not configured`);
