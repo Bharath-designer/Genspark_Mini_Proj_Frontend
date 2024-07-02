@@ -20,7 +20,7 @@ const fetchData = async (url, method, payload, skipActions) => {
             }
         }
 
-        const BASE_URL = "http://192.168.31.198:4000"
+        const BASE_URL = "http://localhost:4000"
 
         const rawData = await fetch(BASE_URL + url, {
             headers: {
